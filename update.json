@@ -1,5 +1,5 @@
 {
   "version": "1.0.0",
   "url": "https://github.com/alanhasn/adb-pro-updates/releases/latest",
-  "notes": "Initial licensed release."
+  "notes": "ci: build the EXE and publish a release on every push to main"
 }
