@@ -1,5 +1,5 @@
 {
   "version": "1.1.0",
   "url": "https://github.com/alanhasn/adb-pro-updates/releases/latest",
-  "notes": "feat: optional per-license expiry + clock-rollback guard"
+  "notes": "docs: revert update-manifest url back to the public release link"
 }
