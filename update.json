@@ -1,5 +1,4 @@
 {
   "version": "1.1.0",
-  "url": "https://github.com/alanhasn/adb-pro-updates/releases/latest",
-  "notes": "feat: optional per-license expiry + clock-rollback guard"
+  "notes": "Hardware-locked licensing with optional expiry and a clock-rollback guard."
 }

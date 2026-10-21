@@ -2,27 +2,33 @@
 
 This tiny public repo exists for one reason: **ADB PRO** (the main app lives
 in a separate, private repository) checks `update.json` here on startup to
-see if a newer version exists, and shows a one-line "update available" notice
-if so. No source code or customer data lives here — just a version manifest
-and, as GitHub Releases, the downloadable `.exe` for each version.
+see if a newer version exists, and shows a one-line "update available"
+notice if so.
+
+**This repo only ever holds a version number and a one-line note — never the
+EXE itself, and never a public download link.** ADB PRO is a PyInstaller
+build, which can be decompiled close to its original Python source (and
+that source embeds the license-signing secret) - so the compiled app must
+never be publicly downloadable. It's built automatically on every push (see
+`.github/workflows/build-and-release.yml` in the main repo) as a **private**
+Actions artifact, and handed to each shop directly by the developer.
 
 ## Shipping a new version
 
-1. Bump `VERSION` in `core/version.py` in the main app repo.
-2. Build the new EXE (see the main repo's Readme).
-3. In this repo: `gh release create vX.Y.Z path\to\ADB_PRO.exe --title "vX.Y.Z" --notes "What changed"`
-4. Update `update.json` here: bump `"version"` to match, update `"notes"` to
-   a short one-line summary, then commit + push.
-
-The app re-checks `update.json` every time it starts (silently skips the
-check if there's no internet — it never blocks startup).
+1. Bump `VERSION` in `core/version.py` in the main app repo and push to
+   `main` — CI builds the EXE and bumps `update.json` here automatically.
+2. Download the built EXE from that run's private Actions artifact (only
+   visible to people with access to the main repo) and send it to the shop
+   yourself, the same way as any other update.
 
 ## update.json format
 
 ```json
 {
   "version": "1.2.0",
-  "url": "https://github.com/alanhasn/adb-pro-updates/releases/latest",
   "notes": "One-line summary of what changed, shown in the in-app notice."
 }
 ```
+
+No `url` field — the in-app notice is informational only ("a new version is
+out, contact the developer"), it never links anywhere public.
